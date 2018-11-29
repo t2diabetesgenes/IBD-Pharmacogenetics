@@ -40,13 +40,14 @@ for i=1:22+sex
 end
 
 ylimit=max(max(-log10(tab2(:,3)))+1); %if strongest hit is 1e-60, plot window goes up to 1e-61
+ylimitmin=min(min(-log10(tab2(:,3))));
 
 plot([0,max(bptrack)],-log10([5e-8,5e-8]),'k') %genome wide significant line
 
 xlabel('Chromosome','Interpreter','latex')
 ylabel('$-\log_{10}(p)$','Interpreter','latex')
 xlim([0,max(bptrack)])
-ylim([0,max(ylimit,-log10(1e-8))]) %y axis will always go to 1e-8 at least
+ylim([ylimitmin,max(ylimit,-log10(1e-8))]) %y axis will always go to 1e-8 at least
 
 M=movmean(bptrack,2); %this calculates the moving average of bptrack and uses them as chromosome label markers.
 xticks(M(2:end));
